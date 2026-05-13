@@ -144,9 +144,9 @@ export class SubscriptionManager {
 
   private openWebSocket(sub: Subscription): void {
     let urls = WS_MAINNET;
-    if (process.env.BYBIT_TESTNET === 'true') {
+    if (process.env.BYBIT_NETWORK === 'test') {
       urls = WS_TESTNET;
-    } else if (process.env.BYBIT_TESTNET === 'demo') {
+    } else if (process.env.BYBIT_NETWORK === 'demo') {
       urls = WS_DEMO;
     }
     const ws = new WebSocket(urls[sub.category], { headers: commonHeaders() });

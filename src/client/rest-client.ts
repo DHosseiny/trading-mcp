@@ -17,9 +17,9 @@ function withTimeout(ms: number): { signal: AbortSignal; clear: () => void } {
 // tests and late-init callers can set them after the module is loaded.
 function getConfig() {
   let baseUrl = MAINNET;
-  if (process.env.BYBIT_TESTNET === 'true') {
+  if (process.env.BYBIT_NETWORK === 'test') {
     baseUrl = TESTNET;
-  } else if (process.env.BYBIT_TESTNET === 'demo') {
+  } else if (process.env.BYBIT_NETWORK === 'demo') {
     baseUrl = DEMONET;
   }
   return {

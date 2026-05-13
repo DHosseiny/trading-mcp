@@ -87,9 +87,9 @@ export class WsClient {
 
     return new Promise((resolve, reject) => {
       let urls = WS_MAINNET;
-      if (process.env.BYBIT_TESTNET === 'true') {
+      if (process.env.BYBIT_NETWORK === 'test') {
         urls = WS_TESTNET;
-      } else if (process.env.BYBIT_TESTNET === 'demo') {
+      } else if (process.env.BYBIT_NETWORK === 'demo') {
         urls = WS_DEMO;
       }
       const url = urls[category];
@@ -190,9 +190,9 @@ export class WsClient {
 
     return new Promise((resolve, reject) => {
       let urls = WS_MAINNET;
-      if (process.env.BYBIT_TESTNET === 'true') {
+      if (process.env.BYBIT_NETWORK === 'test') {
         urls = WS_TESTNET;
-      } else if (process.env.BYBIT_TESTNET === 'demo') {
+      } else if (process.env.BYBIT_NETWORK === 'demo') {
         urls = WS_DEMO;
       }
       const url = urls.trade;

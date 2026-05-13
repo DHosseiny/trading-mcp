@@ -147,7 +147,7 @@ AI 助手会读取 README，了解所有可用工具，随后即可协助你查�
 | `BYBIT_API_KEY` | 鉴权接口必填 | — | Bybit API Key |
 | `BYBIT_API_SECRET` | HMAC 模式必填 | — | Bybit API Secret（HMAC-SHA256 签名） |
 | `BYBIT_API_PRIVATE_KEY_PATH` | RSA 模式必填 | — | RSA 私钥 PEM 文件的绝对路径（RSA-SHA256 签名） |
-| `BYBIT_TESTNET` | 否 | `false` | 设为 `true` 使用测试网，或设为 `demo` 使用模拟交易 |
+| `BYBIT_NETWORK` | 否 | `main` | 设为 `test` 使用测试网，或设为 `demo` 使用模拟交易 |
 
 行情类工具无需 API 凭证。鉴权接口需要 `BYBIT_API_KEY` 加上**其中一种**签名凭证：
 
@@ -227,7 +227,7 @@ RSA 模式（自生成 API Key）：
       "env": {
         "BYBIT_API_KEY": "你的测试网 API Key",
         "BYBIT_API_SECRET": "你的测试网 API Secret",
-        "BYBIT_TESTNET": "true"
+        "BYBIT_NETWORK": "test"
       }
     }
   }
@@ -503,7 +503,7 @@ npm run build
 加密货币交易存在重大亏损风险，使用前请注意以下事项：
 
 - **保护 API 凭证** — 启用 IP 白名单，仅授予必要权限；非必要情况下禁用提币权限
-- **先测试再交易** — 接入真实账户前，请先在 [Bybit 测试网](https://testnet.bybit.com/)完成验证（设置 `BYBIT_TESTNET=true` 或 `BYBIT_TESTNET=demo`）
+- **先测试再交易** — 接入真实账户前，请先在 [Bybit 测试网](https://testnet.bybit.com/)完成验证（设置 `BYBIT_NETWORK=test` 或 `BYBIT_NETWORK=demo`）
 - **您掌控一切** — 所有操作均由您或 AI 助手主动发起，请在执行前仔细确认订单内容
 - **遵守 Bybit 条款** — 使用本服务器须遵守 [Bybit 用户协议](https://www.bybit.com/zh-MY/terms-service/terms-of-use)
 
