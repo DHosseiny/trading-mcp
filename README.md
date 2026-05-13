@@ -147,7 +147,7 @@ The AI will read the README, understand all available tools, and be ready to ass
 | `BYBIT_API_KEY` | For auth endpoints | — | Your Bybit API key |
 | `BYBIT_API_SECRET` | HMAC mode | — | Your Bybit API secret (HMAC-SHA256 signing) |
 | `BYBIT_API_PRIVATE_KEY_PATH` | RSA mode | — | Absolute path to your RSA private key PEM file (RSA-SHA256 signing) |
-| `BYBIT_TESTNET` | No | `false` | Set to `true` to use the testnet |
+| `BYBIT_TESTNET` | No | `false` | Set to `true` to use the testnet, or `demo` for demo trading |
 
 Market data tools work without credentials. Authenticated tools require `BYBIT_API_KEY` plus **exactly one** signing credential:
 
@@ -503,7 +503,7 @@ npm run build
 Cryptocurrency trading involves substantial risk of loss. Please read the following before use:
 
 - **Protect Your API Credentials** — Use IP allowlists and grant only the minimum permissions required; disable withdrawal access unless explicitly needed
-- **Test Before You Trade** — Validate your setup on [Bybit Testnet](https://testnet.bybit.com/) before connecting to your live account (set `BYBIT_TESTNET=true`)
+- **Test Before You Trade** — Validate your setup on [Bybit Testnet](https://testnet.bybit.com/) before connecting to your live account (set `BYBIT_TESTNET=true` or `BYBIT_TESTNET=demo`)
 - **You Are in Control** — All actions are initiated by you or your AI assistant; review orders carefully before execution
 - **Bybit Terms Apply** — Use of this server is subject to [Bybit's Terms of Service](https://www.bybit.com/en/terms-service/terms-of-use)
 

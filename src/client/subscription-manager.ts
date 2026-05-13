@@ -26,6 +26,17 @@ const WS_TESTNET: Record<WsCategory, string> = {
   trade:   'wss://stream-testnet.bybit.com/v5/trade',
 };
 
+const WS_DEMO: Record<WsCategory, string> = {
+  linear:  'wss://stream-demo.bybit.com/v5/public/linear',
+  spot:    'wss://stream-demo.bybit.com/v5/public/spot',
+  inverse: 'wss://stream-demo.bybit.com/v5/public/inverse',
+  option:  'wss://stream-demo.bybit.com/v5/public/option',
+  private: 'wss://stream-demo.bybit.com/v5/private',
+  spread:  'wss://stream-demo.bybit.com/v5/public/spread',
+  misc:    'wss://stream-demo.bybit.com/v5/public/misc/status',
+  trade:   'wss://stream-demo.bybit.com/v5/trade',
+};
+
 const MAX_MESSAGES = 500;
 const IDLE_EXPIRE_MS = 5 * 60 * 1000;
 const MAX_RECONNECT_ATTEMPTS = 3;
@@ -132,7 +143,12 @@ export class SubscriptionManager {
   }
 
   private openWebSocket(sub: Subscription): void {
-    const urls = process.env.BYBIT_TESTNET === 'true' ? WS_TESTNET : WS_MAINNET;
+    let urls = WS_MAINNET;
+    if (process.env.BYBIT_TESTNET === 'true') {
+      urls = WS_TESTNET;
+    } else if (process.env.BYBIT_TESTNET === 'demo') {
+      urls = WS_DEMO;
+    }
     const ws = new WebSocket(urls[sub.category], { headers: commonHeaders() });
     sub.ws = ws;
     sub.status = 'connecting';
