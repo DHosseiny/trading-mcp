@@ -28,6 +28,17 @@ const WS_TESTNET = {
   trade: 'wss://stream-testnet.bybit.com/v5/trade',
 } as const;
 
+const WS_DEMO = {
+  linear: 'wss://stream-demo.bybit.com/v5/public/linear',
+  spot: 'wss://stream-demo.bybit.com/v5/public/spot',
+  inverse: 'wss://stream-demo.bybit.com/v5/public/inverse',
+  option: 'wss://stream-demo.bybit.com/v5/public/option',
+  private: 'wss://stream-demo.bybit.com/v5/private',
+  spread: 'wss://stream-demo.bybit.com/v5/public/spread',
+  misc: 'wss://stream-demo.bybit.com/v5/public/misc/status',
+  trade: 'wss://stream-demo.bybit.com/v5/trade',
+} as const;
+
 export type WsCategory = keyof typeof WS_MAINNET;
 
 export interface TradeRequestOptions {
@@ -75,7 +86,12 @@ export class WsClient {
     } = opts;
 
     return new Promise((resolve, reject) => {
-      const urls = process.env.BYBIT_TESTNET === 'true' ? WS_TESTNET : WS_MAINNET;
+      let urls = WS_MAINNET;
+      if (process.env.BYBIT_NETWORK === 'test') {
+        urls = WS_TESTNET;
+      } else if (process.env.BYBIT_NETWORK === 'demo') {
+        urls = WS_DEMO;
+      }
       const url = urls[category];
       const ws = new WebSocket(url, { headers: commonHeaders() });
       const messages: unknown[] = [];
@@ -173,7 +189,12 @@ export class WsClient {
     const { op, args, timeoutMs = 5000 } = opts;
 
     return new Promise((resolve, reject) => {
-      const urls = process.env.BYBIT_TESTNET === 'true' ? WS_TESTNET : WS_MAINNET;
+      let urls = WS_MAINNET;
+      if (process.env.BYBIT_NETWORK === 'test') {
+        urls = WS_TESTNET;
+      } else if (process.env.BYBIT_NETWORK === 'demo') {
+        urls = WS_DEMO;
+      }
       const url = urls.trade;
       const ws = new WebSocket(url, { headers: commonHeaders() });
       let settled = false;

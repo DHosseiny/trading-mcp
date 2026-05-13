@@ -4,6 +4,7 @@ import { commonHeaders } from '../version.js';
 
 const MAINNET = 'https://api.bybit.com';
 const TESTNET = 'https://api-testnet.bybit.com';
+const DEMONET = 'https://api-demo.bybit.com';
 const REQUEST_TIMEOUT_MS = 10_000;
 
 function withTimeout(ms: number): { signal: AbortSignal; clear: () => void } {
@@ -15,8 +16,14 @@ function withTimeout(ms: number): { signal: AbortSignal; clear: () => void } {
 // Important: env vars are read at call time (not at import time) so that
 // tests and late-init callers can set them after the module is loaded.
 function getConfig() {
+  let baseUrl = MAINNET;
+  if (process.env.BYBIT_NETWORK === 'test') {
+    baseUrl = TESTNET;
+  } else if (process.env.BYBIT_NETWORK === 'demo') {
+    baseUrl = DEMONET;
+  }
   return {
-    baseUrl: process.env.BYBIT_TESTNET === 'true' ? TESTNET : MAINNET,
+    baseUrl,
     apiKey: process.env.BYBIT_API_KEY,
   };
 }
